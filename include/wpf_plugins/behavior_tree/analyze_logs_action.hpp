@@ -47,7 +47,7 @@ public:
         BT::InputPort<std::string>("logs_directory", ""),
         BT::InputPort<bool>("overwrite_results", false, "Overwrite logs or not"),
         BT::InputPort<float>("start_time", 0.0f, "Start timestamp for the analysis interval"),
-        BT::InputPort<float>("end_time", 0.0f, "End timestamp for the analysis interval")
+        BT::InputPort<float>("end_time", 0.0f, "End timestamp for the analysis interval"),
         BT::InputPort<float>("start_position", 0.0f, "Start position for the analysis interval"),
         BT::InputPort<float>("end_position", 0.0f, "End position for the analysis interval")
       });

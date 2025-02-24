@@ -29,6 +29,7 @@ void AnalyzeLogsAction::initialize()
   double end_time;
   getInput("end_time", end_time);
   goal_.end_time = static_cast<float>(end_time);
+  double start_position;
   getInput("start_position", start_position);
   goal_.start_position = static_cast<float>(start_position);
   double end_position;
