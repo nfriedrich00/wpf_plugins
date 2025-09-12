@@ -12,6 +12,8 @@ find_package(nav2_behavior_tree REQUIRED)
 find_package(behaviortree_cpp REQUIRED)
 find_package(wpf_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
 
 include_directories(
   include
@@ -25,19 +27,25 @@ set(dependencies
   behaviortree_cpp
   wpf_msgs
   std_msgs
+  geometry_msgs
+  nav_msgs
 )
 
 add_library(analyze_logs_action_bt_node SHARED
   src/analyze_logs_action.cpp
+)
+add_library(goal_updater_bt_node SHARED
+  src/goal_updater_node.cpp
 )
 add_library(publish_action_bt_node SHARED
   src/publish_action.cpp
 )
 
 target_compile_definitions(analyze_logs_action_bt_node PRIVATE BT_PLUGIN_EXPORT)
+target_compile_definitions(goal_updater_bt_node PRIVATE BT_PLUGIN_EXPORT)
 target_compile_definitions(publish_action_bt_node PRIVATE BT_PLUGIN_EXPORT)
 
-install(TARGETS analyze_logs_action_bt_node publish_action_bt_node
+install(TARGETS analyze_logs_action_bt_node goal_updater_bt_node publish_action_bt_node
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
@@ -51,6 +59,9 @@ install(TARGETS analyze_logs_action_bt_node publish_action_bt_node
 ament_target_dependencies(analyze_logs_action_bt_node
   ${dependencies}
 )
+ament_target_dependencies(goal_updater_bt_node
+  ${dependencies}
+)
 ament_target_dependencies(publish_action_bt_node
   ${dependencies}
 )
@@ -61,6 +72,7 @@ install(DIRECTORY include/
 
 ament_export_include_directories(include)
 ament_export_libraries(analyze_logs_action_bt_node)
+ament_export_libraries(goal_updater_bt_node)
 ament_export_libraries(publish_action_bt_node)
 ament_export_dependencies(${dependencies})
 
