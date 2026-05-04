@@ -37,24 +37,27 @@ add_library(analyze_logs_action_bt_node SHARED
 add_library(goal_updater_bt_node SHARED
   src/goal_updater_node.cpp
 )
+add_library(is_goal_nearby_bt_node SHARED
+  src/is_goal_nearby_node.cpp
+)
+add_library(move_path_start_pose_bt_node SHARED
+  src/move_path_start_pose.cpp
+)
 add_library(publish_action_bt_node SHARED
   src/publish_action.cpp
 )
 
 target_compile_definitions(analyze_logs_action_bt_node PRIVATE BT_PLUGIN_EXPORT)
 target_compile_definitions(goal_updater_bt_node PRIVATE BT_PLUGIN_EXPORT)
+target_compile_definitions(is_goal_nearby_bt_node PRIVATE BT_PLUGIN_EXPORT)
+target_compile_definitions(move_path_start_pose_bt_node PRIVATE BT_PLUGIN_EXPORT)
 target_compile_definitions(publish_action_bt_node PRIVATE BT_PLUGIN_EXPORT)
 
-install(TARGETS analyze_logs_action_bt_node goal_updater_bt_node publish_action_bt_node
+install(TARGETS analyze_logs_action_bt_node goal_updater_bt_node publish_action_bt_node is_goal_nearby_bt_node move_path_start_pose_bt_node
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
 )
-#install(TARGETS publish_action_bt_node
-#  ARCHIVE DESTINATION lib
-#  LIBRARY DESTINATION lib
-#  RUNTIME DESTINATION bin
-#)
 
 ament_target_dependencies(analyze_logs_action_bt_node
   ${dependencies}
@@ -62,7 +65,13 @@ ament_target_dependencies(analyze_logs_action_bt_node
 ament_target_dependencies(goal_updater_bt_node
   ${dependencies}
 )
+ament_target_dependencies(is_goal_nearby_bt_node
+  ${dependencies}
+)
 ament_target_dependencies(publish_action_bt_node
+  ${dependencies}
+)
+ament_target_dependencies(move_path_start_pose_bt_node
   ${dependencies}
 )
 
@@ -73,7 +82,9 @@ install(DIRECTORY include/
 ament_export_include_directories(include)
 ament_export_libraries(analyze_logs_action_bt_node)
 ament_export_libraries(goal_updater_bt_node)
+ament_export_libraries(is_goal_nearby_bt_node)
 ament_export_libraries(publish_action_bt_node)
+ament_export_libraries(move_path_start_pose_bt_node)
 ament_export_dependencies(${dependencies})
 
 ament_package()
